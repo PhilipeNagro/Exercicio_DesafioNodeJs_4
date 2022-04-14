@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
-    "test": "jest"
+    "test": "jest -i --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +14,10 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
-    "mongoose": "^6.2.10",
+    "mongodb-memory-server": "^6.9.2",
+    "mongoose": "^5.12.14",
     "prettier": "^2.6.2",
+    "ts-jest": "^27.1.4",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

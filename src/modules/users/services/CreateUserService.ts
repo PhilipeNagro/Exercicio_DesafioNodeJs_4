@@ -1,5 +1,6 @@
 import AppError from "@shared/errors/AppError";
 import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
+import { IUserInterface } from "@shared/infra/database/mongoose/schemas/User";
 
 export interface ICreateUser {
   name: string;
@@ -11,7 +12,10 @@ export default class CreateUserService {
     this.usersRepository = new UsersRepository();
   }
 
-  public async execute({ name, username }: ICreateUser): Promise<any> {
+  public async execute({
+    name,
+    username,
+  }: ICreateUser): Promise<IUserInterface> {
     const verifyUserExists = await this.usersRepository.findClient(username);
 
     if (verifyUserExists) {
