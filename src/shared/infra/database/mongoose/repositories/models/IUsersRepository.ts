@@ -1,5 +1,14 @@
-import { IUserInterface } from "../../schemas/User";
+import { ITodos, IUserInterface } from "../../schemas/User";
+
+export interface ICreateUser {
+  name: string;
+  username: string;
+}
 
 export default interface IUsersRepository {
-  findOneAndUpdateUser({ name, username }: any): Promise<IUserInterface>;
+  findTodos(username?: string): Promise<ITodos[] | null>;
+
+  findClient(username?: string): Promise<IUserInterface | null>;
+
+  createClient({ name, username }: ICreateUser): Promise<IUserInterface>;
 }

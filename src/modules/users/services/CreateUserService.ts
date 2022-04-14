@@ -1,4 +1,5 @@
-import UsersRepository from "../../../shared/infra/database/mongoose/repositories/implementations/UsersRepository";
+import AppError from "@shared/errors/AppError";
+import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
 
 export interface ICreateUser {
   name: string;
@@ -11,7 +12,13 @@ export default class CreateUserService {
   }
 
   public async execute({ name, username }: ICreateUser): Promise<any> {
-    const userToFind = await this.usersRepository.findOneAndUpdateUser({
+    const verifyUserExists = await this.usersRepository.findClient(username);
+
+    if (verifyUserExists) {
+      throw new AppError("Usuário já existe");
+    }
+
+    const userToFind = await this.usersRepository.createClient({
       username,
       name,
     });

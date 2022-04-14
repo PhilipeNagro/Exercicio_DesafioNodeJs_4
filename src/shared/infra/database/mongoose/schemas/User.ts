@@ -1,6 +1,6 @@
 import { Schema, Document, model } from "mongoose";
 
-interface ITodos {
+export interface ITodos {
   _id: string;
   title: string;
   deadline: string;

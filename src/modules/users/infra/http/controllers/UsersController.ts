@@ -1,6 +1,6 @@
+import CreateUserService from "@modules/users/services/CreateUserService";
+import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
 import { Request, Response } from "express";
-import UsersRepository from "../../../../../shared/infra/database/mongoose/repositories/implementations/UsersRepository";
-import CreateUserService from "../../../services/CreateUserService";
 
 export default class UsersController {
   public async store(request: Request, response: Response): Promise<Response> {
