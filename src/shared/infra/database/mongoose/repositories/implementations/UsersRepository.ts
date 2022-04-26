@@ -1,8 +1,38 @@
 import { v4 as uuidv4 } from "uuid";
 import User, { ITodos, IUserInterface } from "../../schemas/User";
-import IUsersRepository, { ICreateUser } from "../models/IUsersRepository";
+import IUsersRepository, {
+  ICreateTodo,
+  ICreateUser,
+} from "../models/IUsersRepository";
 
 export default class UsersRepository implements IUsersRepository {
+  async createTodos({
+    username,
+    title,
+    deadline,
+  }: ICreateTodo): Promise<IUserInterface | null> {
+    const newTodo = {
+      id: uuidv4(),
+      title,
+      done: false,
+      deadline: new Date(deadline),
+      created_at: new Date(),
+    };
+
+    const todo = await User.findOneAndUpdate(
+      {
+        username,
+      },
+      {
+        $setOnInsert: {
+          _id: uuidv4(),
+        },
+        $addToSet: { todos: newTodo },
+      }
+    );
+    return todo;
+  }
+
   async findTodos(username?: string): Promise<ITodos[] | null> {
     const user = await User.findOne({
       username,
