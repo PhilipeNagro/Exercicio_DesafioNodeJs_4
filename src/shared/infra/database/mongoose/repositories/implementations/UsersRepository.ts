@@ -3,9 +3,29 @@ import User, { ITodos, IUserInterface } from "../../schemas/User";
 import IUsersRepository, {
   ICreateTodo,
   ICreateUser,
+  IFindAndUpdateTodo,
 } from "../models/IUsersRepository";
 
 export default class UsersRepository implements IUsersRepository {
+  async findAndUpdateTodo({
+    username,
+    deadline,
+    title,
+    id,
+  }: IFindAndUpdateTodo): Promise<IUserInterface | null> {
+    const novoTodo = await User.findOneAndUpdate(
+      { username, "todos.id": id },
+      { $set: { "todos.$.title": title, "todos.$.deadline": deadline } },
+      { new: true }
+    );
+
+    if (!novoTodo) {
+      return null;
+    }
+
+    return novoTodo;
+  }
+
   async createTodos({
     username,
     title,

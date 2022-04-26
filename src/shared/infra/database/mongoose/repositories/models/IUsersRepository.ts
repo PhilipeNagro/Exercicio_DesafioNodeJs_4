@@ -10,6 +10,12 @@ export interface ICreateTodo {
   title: string;
   deadline: string;
 }
+export interface IFindAndUpdateTodo {
+  username: string;
+  title: string;
+  deadline: string;
+  id: string;
+}
 
 export default interface IUsersRepository {
   findTodos(username?: string): Promise<ITodos[] | null>;
@@ -23,4 +29,11 @@ export default interface IUsersRepository {
     title,
     deadline,
   }: ICreateTodo): Promise<IUserInterface | null>;
+
+  findAndUpdateTodo({
+    username,
+    deadline,
+    title,
+    id,
+  }: IFindAndUpdateTodo): Promise<IUserInterface | null>;
 }
