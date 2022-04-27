@@ -17,6 +17,7 @@ export default class CreateUserService {
     username,
   }: ICreateUser): Promise<IUserInterface> {
     const verifyUserExists = await this.usersRepository.findClient(username);
+    console.log(verifyUserExists);
 
     if (verifyUserExists) {
       throw new AppError("Usuário já existe");

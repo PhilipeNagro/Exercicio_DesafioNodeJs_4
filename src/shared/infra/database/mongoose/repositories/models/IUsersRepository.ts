@@ -1,3 +1,4 @@
+import { ICreateTodo } from "@modules/users/dtos/ITodosDTO";
 import { ITodos, IUserInterface } from "../../schemas/User";
 
 export interface ICreateUser {
@@ -5,11 +6,6 @@ export interface ICreateUser {
   username: string;
 }
 
-export interface ICreateTodo {
-  username: string;
-  title: string;
-  deadline: string;
-}
 export interface IFindAndUpdateTodo {
   username: string;
   title: string;

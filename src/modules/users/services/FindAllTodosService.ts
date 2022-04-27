@@ -1,6 +1,7 @@
 import AppError from "@shared/errors/AppError";
 import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
 import { ITodos } from "@shared/infra/database/mongoose/schemas/User";
+import { ICreateTodo } from "../dtos/ITodosDTO";
 
 export default class FindAllTodosService {
   constructor(private usersRepository: UsersRepository) {

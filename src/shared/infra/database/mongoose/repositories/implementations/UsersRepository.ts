@@ -1,7 +1,11 @@
+import { ICreateTodo } from "@modules/users/dtos/ITodosDTO";
 import { v4 as uuidv4 } from "uuid";
-import User, { ITodos, IUserInterface } from "../../schemas/User";
+import User, {
+  ITodos,
+  IUserInterface,
+  ITodosInterface,
+} from "../../schemas/User";
 import IUsersRepository, {
-  ICreateTodo,
   ICreateUser,
   IFindAndUpdateTodo,
 } from "../models/IUsersRepository";
@@ -48,6 +52,10 @@ export default class UsersRepository implements IUsersRepository {
           _id: uuidv4(),
         },
         $addToSet: { todos: newTodo },
+      },
+      {
+        new: true,
+        upsert: true,
       }
     );
     return todo;

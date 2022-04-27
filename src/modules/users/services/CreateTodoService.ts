@@ -2,14 +2,6 @@ import AppError from "@shared/errors/AppError";
 import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
 import { IUserInterface } from "@shared/infra/database/mongoose/schemas/User";
 
-export interface ICreateTodo {
-  // _id: string;
-  title: string;
-  deadline: string;
-  done: boolean;
-  createdAt: Date;
-}
-
 interface IRequestDTO {
   username: string;
   deadline: string;

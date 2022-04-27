@@ -3,14 +3,14 @@ import { Schema, Document, model } from "mongoose";
 export interface ITodos {
   _id: string;
   title: string;
-  deadline: string;
+  deadline: Date;
   done: boolean;
   createdAt: Date;
 }
 export interface ITodosInterface extends Document {
   _id: string;
   title: string;
-  deadline: string;
+  deadline: Date;
   done: boolean;
   createdAt: Date;
 }

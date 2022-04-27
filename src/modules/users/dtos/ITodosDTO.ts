@@ -5,3 +5,13 @@ export interface ITodoDTO {
   deadline: Date;
   created_at: Date;
 }
+
+export interface ICreateTodo {
+  username: string;
+  title: string;
+  deadline: string;
+}
+
+// export interface IFindTodos {
+//   username: string;
+// }
