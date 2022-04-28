@@ -12,6 +12,9 @@ export interface ICreateTodo {
   deadline: string;
 }
 
-// export interface IFindTodos {
-//   username: string;
-// }
+export interface IUpdateByID {
+  username: string;
+  title: string;
+  deadline: string;
+  id: string;
+}

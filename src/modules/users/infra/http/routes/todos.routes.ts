@@ -8,5 +8,5 @@ const todosController = new TodosController();
 
 todosRouter.get("/", checksExistsUserAccount, todosController.index);
 todosRouter.post("/", checksExistsUserAccount, todosController.store);
-// todosRouter.put("/:id", checksExistsUserAccount, todosController.newmetodo)
+todosRouter.put("/:id", checksExistsUserAccount, todosController.update);
 export default todosRouter;

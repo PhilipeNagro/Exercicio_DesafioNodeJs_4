@@ -18,7 +18,7 @@ export default class UsersRepository implements IUsersRepository {
     id,
   }: IFindAndUpdateTodo): Promise<IUserInterface | null> {
     const novoTodo = await User.findOneAndUpdate(
-      { username, "todos.id": id },
+      { username, "todos._id": id },
       { $set: { "todos.$.title": title, "todos.$.deadline": deadline } },
       { new: true }
     );
@@ -36,7 +36,7 @@ export default class UsersRepository implements IUsersRepository {
     deadline,
   }: ICreateTodo): Promise<IUserInterface | null> {
     const newTodo = {
-      id: uuidv4(),
+      _id: uuidv4(),
       title,
       done: false,
       deadline: new Date(deadline),
