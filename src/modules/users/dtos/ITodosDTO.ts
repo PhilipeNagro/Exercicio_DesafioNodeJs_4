@@ -18,3 +18,9 @@ export interface IUpdateByID {
   deadline: string;
   id: string;
 }
+
+export interface IFindAndCheckTodo {
+  username: string;
+  id: string;
+  done: boolean;
+}

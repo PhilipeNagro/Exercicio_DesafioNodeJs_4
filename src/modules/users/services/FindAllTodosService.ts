@@ -12,7 +12,7 @@ export default class FindAllTodosService {
     const todos = await this.usersRepository.findTodos(username);
 
     if (!todos) {
-      throw new AppError("Todos do usuário não existem");
+      throw new AppError("Usuario não encontrado");
     }
 
     return todos;

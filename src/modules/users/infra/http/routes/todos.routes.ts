@@ -9,4 +9,10 @@ const todosController = new TodosController();
 todosRouter.get("/", checksExistsUserAccount, todosController.index);
 todosRouter.post("/", checksExistsUserAccount, todosController.store);
 todosRouter.put("/:id", checksExistsUserAccount, todosController.update);
+todosRouter.patch(
+  "/:id/done",
+  checksExistsUserAccount,
+  todosController.updateCheck
+);
+// todosController.delete("/todos/:id", checksExistsUserAccount, todosController.delete);
 export default todosRouter;

@@ -1,10 +1,35 @@
+import CheckTodoService from "@modules/users/services/CheckTodoService";
 import CreateTodoService from "@modules/users/services/CreateTodoService";
 import FindAllTodosService from "@modules/users/services/FindAllTodosService";
 import UpdateTodoService from "@modules/users/services/UpdateTodoService";
 import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
+
 import { Request, Response } from "express";
 
 export default class TodosController {
+  //
+  public async delete(request: Request, response: Response) {
+    const { username } = request.headers;
+    const { id } = request.params;
+    const usersRepository = new UsersRepository();
+    // const deleteTodo = new DeleteTodoService(usersRepository);
+  }
+
+  public async updateCheck(request: Request, response: Response) {
+    const { username } = request.headers;
+    const { id } = request.params;
+    const { done } = request.body;
+    const usersRepository = new UsersRepository();
+    const findTodoCheck = new CheckTodoService(usersRepository);
+    const CheckTodo = await findTodoCheck.execute({
+      username: String(username),
+      id,
+      done,
+    });
+
+    return response.status(200).json(CheckTodo);
+  }
+
   public async update(request: Request, response: Response) {
     const { username } = request.headers;
     const { deadline, title } = request.body;

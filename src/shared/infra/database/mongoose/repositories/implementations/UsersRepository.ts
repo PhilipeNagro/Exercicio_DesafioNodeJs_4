@@ -1,4 +1,4 @@
-import { ICreateTodo } from "@modules/users/dtos/ITodosDTO";
+import { ICreateTodo, IFindAndCheckTodo } from "@modules/users/dtos/ITodosDTO";
 import { v4 as uuidv4 } from "uuid";
 import User, {
   ITodos,
@@ -11,6 +11,24 @@ import IUsersRepository, {
 } from "../models/IUsersRepository";
 
 export default class UsersRepository implements IUsersRepository {
+  async findAndCheckTodo({
+    username,
+    id,
+    done,
+  }: IFindAndCheckTodo): Promise<IUserInterface | null> {
+    const novoTodo = await User.findOneAndUpdate(
+      { username, "todos._id": id },
+      { $set: { "todos.$.done": true } },
+      { new: true }
+    );
+
+    if (!novoTodo) {
+      return null;
+    }
+
+    return novoTodo;
+  }
+
   async findAndUpdateTodo({
     username,
     deadline,
