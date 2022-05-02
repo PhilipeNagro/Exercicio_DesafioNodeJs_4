@@ -17,12 +17,6 @@ export default class UpdateTodoService {
     deadline,
     id,
   }: IUpdateByID): Promise<IUserInterface | null> {
-    // ta no middware
-    // const usuario = await this.usersRepository.findClient(username);
-    // if (!usuario) {
-    //   throw new AppError("Usuario nao existe");
-    // }
-
     const updateTodo = await this.usersRepository.findAndUpdateTodo({
       username,
       deadline,

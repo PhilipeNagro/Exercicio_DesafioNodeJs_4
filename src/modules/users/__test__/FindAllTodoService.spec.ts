@@ -2,8 +2,6 @@ import AppError from "@shared/errors/AppError";
 import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
 import User from "@shared/infra/database/mongoose/schemas/User";
 import MongoMock from "@shared/tests/MongoMock";
-import CreateUserService from "../services/CreateUserService";
-import CreateTodoService from "../services/CreateTodoService";
 import FindAllTodosService from "../services/FindAllTodosService";
 
 let usersRepository: UsersRepository;

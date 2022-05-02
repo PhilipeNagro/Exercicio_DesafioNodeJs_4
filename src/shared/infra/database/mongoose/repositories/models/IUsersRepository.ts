@@ -14,17 +14,16 @@ export interface IFindAndUpdateTodo {
 }
 
 export default interface IUsersRepository {
-  findTodos(username?: string): Promise<ITodos[] | null>;
-
-  findClient(username?: string): Promise<IUserInterface | null>;
-
   createClient({ name, username }: ICreateUser): Promise<IUserInterface>;
 
+  findClient(username?: string): Promise<IUserInterface | null>;
   createTodos({
     username,
     title,
     deadline,
   }: ICreateTodo): Promise<IUserInterface | null>;
+
+  findTodos(username?: string): Promise<ITodos[] | null>;
 
   findAndUpdateTodo({
     username,

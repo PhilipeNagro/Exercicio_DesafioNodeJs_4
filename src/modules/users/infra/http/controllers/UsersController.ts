@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 export default class UsersController {
   public async store(request: Request, response: Response): Promise<Response> {
     const { name, username } = request.body;
-    console.log(" aqui");
+    // console.log(" aqui");
     const usersRepository = new UsersRepository();
 
     const createUserService = new CreateUserService(usersRepository);
