@@ -13,7 +13,6 @@ export default async function checksExistsUserAccount(
 
   const userToFind = await userRepository.findClient(String(username));
 
-  console.log(userToFind);
   if (!userToFind) {
     throw new AppError("Usuário não tem registro");
   }

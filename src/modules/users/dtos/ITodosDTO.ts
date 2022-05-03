@@ -6,6 +6,10 @@ export interface ITodoDTO {
   created_at: Date;
 }
 
+export interface IDeleteTodo {
+  username: string;
+  id: string;
+}
 export interface ICreateTodo {
   username: string;
   title: string;

@@ -1,5 +1,6 @@
 import CheckTodoService from "@modules/users/services/CheckTodoService";
 import CreateTodoService from "@modules/users/services/CreateTodoService";
+import DeleteTodoService from "@modules/users/services/DeleteTodoService";
 import FindAllTodosService from "@modules/users/services/FindAllTodosService";
 import UpdateTodoService from "@modules/users/services/UpdateTodoService";
 import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
@@ -12,7 +13,10 @@ export default class TodosController {
     const { username } = request.headers;
     const { id } = request.params;
     const usersRepository = new UsersRepository();
-    // const deleteTodo = new DeleteTodoService(usersRepository);
+    const deleteTodo = new DeleteTodoService(usersRepository);
+
+    await deleteTodo.execute({ username: String(username), id });
+    return response.send().status(200);
   }
 
   public async updateCheck(request: Request, response: Response) {

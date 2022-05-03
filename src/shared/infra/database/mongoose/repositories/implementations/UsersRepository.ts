@@ -1,4 +1,8 @@
-import { ICreateTodo, IFindAndCheckTodo } from "@modules/users/dtos/ITodosDTO";
+import {
+  ICreateTodo,
+  IDeleteTodo,
+  IFindAndCheckTodo,
+} from "@modules/users/dtos/ITodosDTO";
 import { v4 as uuidv4 } from "uuid";
 import User, {
   ITodos,
@@ -11,6 +15,28 @@ import IUsersRepository, {
 } from "../models/IUsersRepository";
 
 export default class UsersRepository implements IUsersRepository {
+  /// AJUSTAR AQUI
+
+  async deleteTodo({
+    username,
+    id,
+  }: IDeleteTodo): Promise<IUserInterface | null> {
+    const findTodo = await User.findOneAndUpdate(
+      {
+        username,
+      },
+      {
+        $pull: { todos: { _id: id } },
+      },
+      {
+        new: true,
+      }
+    );
+
+    console.log(findTodo);
+    return findTodo;
+  }
+
   async findAndCheckTodo({
     username,
     id,
