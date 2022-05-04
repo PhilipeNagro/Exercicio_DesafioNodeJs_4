@@ -33,7 +33,6 @@ export default class UsersRepository implements IUsersRepository {
       }
     );
 
-    console.log(findTodo);
     return findTodo;
   }
 
