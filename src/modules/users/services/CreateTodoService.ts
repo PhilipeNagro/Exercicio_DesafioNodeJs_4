@@ -18,8 +18,6 @@ export default class CreateTodoService {
     title,
     username,
   }: IRequestDTO): Promise<IUserInterface | null> {
-    // const usuario = users.find((user) => user.username === username);
-
     const usuario = await this.usersRepository.findClient(username);
 
     if (!usuario) {

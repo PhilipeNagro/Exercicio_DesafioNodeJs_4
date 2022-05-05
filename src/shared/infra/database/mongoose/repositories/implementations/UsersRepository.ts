@@ -15,8 +15,6 @@ import IUsersRepository, {
 } from "../models/IUsersRepository";
 
 export default class UsersRepository implements IUsersRepository {
-  /// AJUSTAR AQUI
-
   async deleteTodo({
     username,
     id,

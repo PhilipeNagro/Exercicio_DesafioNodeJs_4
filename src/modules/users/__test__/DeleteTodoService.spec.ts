@@ -49,7 +49,6 @@ describe("Delete Todos", () => {
 
     const verifyDelete = await User.findOne({ _id: "123" });
 
-    // expect(verifyDelete?.todos[0]).toBe(undefined);
     expect(verifyDelete?.todos[0]).toBeFalsy();
   });
 

@@ -8,7 +8,6 @@ import UsersRepository from "@shared/infra/database/mongoose/repositories/implem
 import { Request, Response } from "express";
 
 export default class TodosController {
-  //
   public async delete(request: Request, response: Response) {
     const { username } = request.headers;
     const { id } = request.params;

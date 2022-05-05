@@ -17,5 +17,4 @@ todosRouter.patch(
 
 todosRouter.delete("/:id", checksExistsUserAccount, todosController.delete);
 
-// todosController.delete("/todos/:id", checksExistsUserAccount, todosController.delete);
 export default todosRouter;
