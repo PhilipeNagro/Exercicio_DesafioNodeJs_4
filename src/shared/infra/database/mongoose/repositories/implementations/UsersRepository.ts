@@ -57,11 +57,6 @@ export default class UsersRepository implements IUsersRepository {
     title,
     id,
   }: IFindAndUpdateTodo): Promise<ITodos | null> {
-    // const novoTodo = await User.findOneAndUpdate(
-    //   { username, "todos._id": id },
-    //   { $set: { "todos.$.title": title, "todos.$.deadline": deadline } },
-    //   { new: true }
-    // );
     const findUser = await User.findOne({ username });
     const findTodo = findUser?.todos.find((todo) => todo._id === id);
 
