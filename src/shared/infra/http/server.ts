@@ -23,4 +23,7 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     message: "Internal server error",
   });
 });
-app.listen(3331);
+
+app.listen(3331, () => {
+  console.log("\nRunning in port 3331.");
+});

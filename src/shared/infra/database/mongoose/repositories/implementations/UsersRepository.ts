@@ -37,19 +37,18 @@ export default class UsersRepository implements IUsersRepository {
   async findAndCheckTodo({
     username,
     id,
-    done,
-  }: IFindAndCheckTodo): Promise<IUserInterface | null> {
-    const novoTodo = await User.findOneAndUpdate(
-      { username, "todos._id": id },
-      { $set: { "todos.$.done": true } },
-      { new: true }
-    );
+  }: IFindAndCheckTodo): Promise<ITodos | null> {
+    const findUser = await User.findOne({ username });
+    const findTodo = findUser?.todos.find((todo) => todo._id === id);
 
-    if (!novoTodo) {
+    if (!findTodo) {
       return null;
     }
 
-    return novoTodo;
+    findTodo.done = true;
+    findUser?.save();
+
+    return findTodo;
   }
 
   async findAndUpdateTodo({
@@ -57,18 +56,24 @@ export default class UsersRepository implements IUsersRepository {
     deadline,
     title,
     id,
-  }: IFindAndUpdateTodo): Promise<IUserInterface | null> {
-    const novoTodo = await User.findOneAndUpdate(
-      { username, "todos._id": id },
-      { $set: { "todos.$.title": title, "todos.$.deadline": deadline } },
-      { new: true }
-    );
+  }: IFindAndUpdateTodo): Promise<ITodos | null> {
+    // const novoTodo = await User.findOneAndUpdate(
+    //   { username, "todos._id": id },
+    //   { $set: { "todos.$.title": title, "todos.$.deadline": deadline } },
+    //   { new: true }
+    // );
+    const findUser = await User.findOne({ username });
+    const findTodo = findUser?.todos.find((todo) => todo._id === id);
 
-    if (!novoTodo) {
+    if (!findTodo) {
       return null;
     }
 
-    return novoTodo;
+    findTodo.deadline = new Date(deadline);
+    findTodo.title = title;
+    findUser?.save();
+
+    return findTodo;
   }
 
   async createTodos({

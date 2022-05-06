@@ -1,4 +1,8 @@
-import { ICreateTodo } from "@modules/users/dtos/ITodosDTO";
+import {
+  ICreateTodo,
+  IDeleteTodo,
+  IFindAndCheckTodo,
+} from "@modules/users/dtos/ITodosDTO";
 import { ITodos, IUserInterface } from "../../schemas/User";
 
 export interface ICreateUser {
@@ -30,5 +34,8 @@ export default interface IUsersRepository {
     deadline,
     title,
     id,
-  }: IFindAndUpdateTodo): Promise<IUserInterface | null>;
+  }: IFindAndUpdateTodo): Promise<ITodos | null>;
+
+  findAndCheckTodo({ username, id }: IFindAndCheckTodo): Promise<ITodos | null>;
+  deleteTodo({ username, id }: IDeleteTodo): Promise<IUserInterface | null>;
 }

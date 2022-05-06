@@ -21,13 +21,12 @@ export default class TodosController {
   public async updateCheck(request: Request, response: Response) {
     const { username } = request.headers;
     const { id } = request.params;
-    const { done } = request.body;
+
     const usersRepository = new UsersRepository();
     const findTodoCheck = new CheckTodoService(usersRepository);
     const CheckTodo = await findTodoCheck.execute({
       username: String(username),
       id,
-      done,
     });
 
     return response.status(200).json(CheckTodo);

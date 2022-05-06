@@ -26,5 +26,4 @@ export interface IUpdateByID {
 export interface IFindAndCheckTodo {
   username: string;
   id: string;
-  done: boolean;
 }

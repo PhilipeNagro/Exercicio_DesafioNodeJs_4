@@ -14,12 +14,10 @@ export default class CheckTodoService {
   public async execute({
     username,
     id,
-    done,
-  }: IFindAndCheckTodo): Promise<IUserInterface | null> {
+  }: IFindAndCheckTodo): Promise<ITodos | null> {
     const CheckTodo = await this.usersRepository.findAndCheckTodo({
       username,
       id,
-      done,
     });
     return CheckTodo;
   }

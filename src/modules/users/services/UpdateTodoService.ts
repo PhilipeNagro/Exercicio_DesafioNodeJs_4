@@ -16,7 +16,7 @@ export default class UpdateTodoService {
     title,
     deadline,
     id,
-  }: IUpdateByID): Promise<IUserInterface | null> {
+  }: IUpdateByID): Promise<ITodos | null> {
     const updateTodo = await this.usersRepository.findAndUpdateTodo({
       username,
       deadline,
