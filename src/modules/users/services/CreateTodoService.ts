@@ -2,31 +2,33 @@ import AppError from "@shared/errors/AppError";
 import UsersRepository from "@shared/infra/database/mongoose/repositories/implementations/UsersRepository";
 import { IUserInterface } from "@shared/infra/database/mongoose/schemas/User";
 
-export interface ICreateUser {
-  name: string;
+interface IRequestDTO {
   username: string;
+  deadline: string;
+  title: string;
 }
 
-export default class CreateUserService {
+export default class CreateTodoService {
   constructor(private usersRepository: UsersRepository) {
     this.usersRepository = new UsersRepository();
   }
 
   public async execute({
-    name,
+    deadline,
+    title,
     username,
-  }: ICreateUser): Promise<IUserInterface> {
-    const verifyUserExists = await this.usersRepository.findClient(username);
+  }: IRequestDTO): Promise<IUserInterface | null> {
+    const usuario = await this.usersRepository.findClient(username);
 
-    if (verifyUserExists) {
-      throw new AppError("Usuário já existe");
+    if (!usuario) {
+      throw new AppError("Usuário não existe");
     }
-
-    const userToFind = await this.usersRepository.createClient({
+    const updateUserTodo = await this.usersRepository.createTodos({
       username,
-      name,
+      title,
+      deadline,
     });
 
-    return userToFind;
+    return updateUserTodo;
   }
 }
