@@ -41,12 +41,12 @@ export default class UsersRepository implements IUsersRepository {
     const findUser = await User.findOne({ username });
     const findTodo = findUser?.todos.find((todo) => todo._id === id);
 
-    if (!findTodo) {
+    if (!findUser || !findTodo) {
       return null;
     }
 
     findTodo.done = true;
-    findUser?.save();
+    findUser.save();
 
     return findTodo;
   }
@@ -60,13 +60,13 @@ export default class UsersRepository implements IUsersRepository {
     const findUser = await User.findOne({ username });
     const findTodo = findUser?.todos.find((todo) => todo._id === id);
 
-    if (!findTodo) {
+    if (!findUser || !findTodo) {
       return null;
     }
 
     findTodo.deadline = new Date(deadline);
     findTodo.title = title;
-    findUser?.save();
+    findUser.save();
 
     return findTodo;
   }
