@@ -1,0 +1,63 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+     "title":"API de manipulação de produtos",
+     "description":"Essa API tem como objetivoamanipulação dos produtos",
+     "termsOfService":"http:// localhost:3331/terms",
+     "contact":{
+         "email":"philipe.m@nagro.app"
+     },
+     "version":"1.0.0"
+    },
+    "servers":[
+        {
+            "url":"http:// localhost:3331/",
+            "description":"API de desenvolvimento"
+        }
+    ],
+    "paths":{
+        "/users":{
+            "post":{
+               "summary":"Cadastro de usuario",
+               "description":"Rota para cadastrar usuarios",
+               "tags":["Usuario"],
+               "requestBody":{
+                   "content":{
+                       "application/json":{
+                           "schema":{
+                              "$ref": "#/components/schemas/Usuario"
+                           },
+                           "examples":{
+                               "user":{
+                                "value":{
+                                    "name":"Philipe",
+                                    "username":"PH"
+                                }
+                            }
+                           }
+                       }
+                   }
+               },
+               "responses":{
+                   "// CHECKPOINT: Min - 27:00"
+               } 
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "Usuario":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "username":{
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    }
+}
+
