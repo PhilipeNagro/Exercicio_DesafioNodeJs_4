@@ -1,0 +1,379 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+     "title":"API de manipulação de produtos",
+     "description":"Essa API tem como objetivoamanipulação dos produtos",
+     "termsOfService":"",
+     "contact":{
+         "email":"philipe.m@nagro.app"
+     },
+     "version":"1.0.0"
+    },
+    "servers":[
+        {
+            "url":"http://localhost:3331",
+            "description":"API de desenvolvimento"
+        }
+    ],
+    "paths":{
+        "/users":{
+            "post":{
+               "summary":"Cadastro de usuario",
+               "description":"Rota para cadastrar usuarios",
+               "tags":["Usuario"],
+               "requestBody":{
+                   "content":{
+                       "application/json":{
+                           "schema":{
+                              "$ref": "#/components/schemas/Usuario"
+                           },
+                           "examples":{
+                               "user":{
+                                "value":{
+                                    "name":"Philipe",
+                                    "username":"PH"
+                                }
+                            }
+                           }
+                       }
+                   }
+               },
+               "responses":{
+                   "400":{
+                       "description":"User Already exists!"
+                   },
+                   "200":{
+                       "description":"OK",
+                       "content":{
+                           "application/json":{
+                               "schema":{
+                                   "type":"object",
+                                   "$ref":"#/components/schemas/Usuario"
+                               }
+                           }
+                       }
+                   }
+               } 
+            }
+        },
+        "/todos":{
+            "get":{
+                "summary":"Mostrar todo de um usuario",
+                "description":"Rota para mostrar todo de um usuario",
+                "tags":["Todo"],
+                "parameters":[
+                    {
+                        "in": "header",
+                        "name":"username",
+                        "description":"username do usuario a ser consultado os todos",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "anyOf":[{
+
+                                            "$ref":"#/components/schemas/TodoGet"
+                                        }]
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Usuario não tem registro"
+                        
+                    }
+                }
+                
+            },
+            "post":{
+                "summary":"Cadastro de todos",
+                "description":"Rota para cadastrar todo de um usuario",
+                "tags":["Todo"],
+                "parameters":[
+                    {
+                        "in": "header",
+                        "name":"username",
+                        "description":"username do usuario a ser inserido o todo",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Todo"
+                            },
+                            "examples":{
+                                "todo":{
+                                    "value":{
+                                        "title":"Cafe",
+                                        "deadline": "2021-05-23"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },"responses":{
+                    "200":{
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "anyOf":[{
+
+                                            "$ref":"#/components/schemas/TodoGet"
+                                        }]
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Usuario não tem registro"
+                    }
+                }
+            }
+            
+            
+        },
+        "/todos/{id}":{
+            "put":{
+                "summary":"Atualização de Todo atraves de ID",
+                "description":"Rota para atualizar um Todo atraves do ID",
+                "tags":["Todo"],
+                "parameters":[
+                    {
+                        "in":"header",
+                        "name":"username",
+                        "description":"username do usuario que o Todo será atualizado",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                    },
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "description":"ID do TOdo que será atualizado",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Todo"
+                            },
+                            "examples":{
+                                "todo":{
+                                    "value":{
+                                        "title":"Coca",
+                                        "deadline":"2022-05-23"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },"responses":{
+                    "200":{
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "anyOf":[{
+
+                                            "$ref":"#/components/schemas/TodoGet"
+                                        }]
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Usuario não tem registro"
+                    }
+                }
+                
+            },
+            "delete":{
+                "summary":"Delete Todo atraves do ID",
+                "description":"Rota para deletar um Todo atraves do ID",
+                "tags":["Todo"],
+                "parameters":[
+                    {
+                        "in":"header",
+                        "name":"username",
+                        "description":"username do usuario que no qual tera o Todo deletado atraves do ID",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                    },
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "description":"ID do Todo que sera deletado",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"OK"
+                        
+                    },
+                    "400":{
+                        "description":"Usuario não tem registro"
+                    }
+                }
+
+            }
+        },
+        "/todos/{id}/done":{
+            "patch":{
+                "summary":"Check de Todo atraves do ID",
+                "description":"Rota para dar check no Todo atraves do ID",
+                "tags":["Todo"],
+                "parameters":[
+                    {
+                        "in":"header",
+                        "name":"username",
+                        "description":"username do usuario que no qual o Todo sera dado check",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                    },
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "description":"id do Todo no qual sera dado check",
+                        "required":true,
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "done":{
+                                        "type":"boolean"
+                                    }
+                                }
+                            },
+                            "examples":{
+                                "todo":{
+                                    "value":{
+                                        "done":true
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "anyOf":[{
+
+                                            "$ref":"#/components/schemas/TodoGet"
+                                        }]
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Usuario não tem registro"
+                    }
+                }
+            }
+        }
+    },
+    
+    "components":{
+        "schemas":{
+            "Usuario":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "username":{
+                        "type":"string"
+                    }
+                }
+            },
+            "Todo":{
+                "type":"object",
+                "properties":{
+                    "username":{
+                        "type":"string"
+                    },
+                    "title":{
+                        "type":"string"
+                    },
+                    "deadline":{
+                        "type":"string"
+                    }
+                }
+            },
+            
+            "TodoGet":{
+                "type":"object",
+                "properties":{
+                    "_id":{
+                        "type":"string"
+                    },
+                    "title":{
+                        "type":"string"
+                    },
+                    "done":{
+                        "type":"boolean"
+                    },
+                    "deadline":{
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    }
+}
+
