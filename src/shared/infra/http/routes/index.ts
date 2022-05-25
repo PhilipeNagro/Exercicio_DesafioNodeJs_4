@@ -8,7 +8,6 @@ const routes = Router();
 
 routes.use("/users", userRouter);
 routes.use("/todos", todosRouter);
-// swagger
 routes.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 export default routes;
